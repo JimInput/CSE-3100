@@ -1,0 +1,17 @@
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
+
+*.pptx
+*.exe
+*.pdf
+**/*.pdf
+.vscode/
+**/.vscode/
+*.json
+*Zone.Identifier

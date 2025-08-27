@@ -1,0 +1,2 @@
+sum is: 6
+sum is: 12

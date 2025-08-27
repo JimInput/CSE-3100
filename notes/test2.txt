@@ -1,0 +1,92 @@
+#include <stdio.h>
+
+int AddInt(int x, int y)
+{
+    int solution = x + y;
+    return solution;
+}
+int main(void)
+{
+    printf("%d\n", AddInt(4, 5));
+}#include <stdio.h>
+#include <stdlib.h>
+
+/*
+Three pools of memory:
+    1. Static/global
+    2. Stack
+    3. Heap
+Each pool features:
+    * Static/global
+        - Variables declared outside of functions
+        - Stored in data segment
+        - Exists for the entire program
+    * Stack
+        - Variables declared inside functions
+        - Stored in stack frames
+        - Exists only while the function is running
+    * Heap
+        - Dynamically allocated memory
+        - Exists until explicitly deallocated
+MEMORY
+    * Every Process has an 
+        - Address Space
+    * Executable code is at the bottom
+    * Statics and globals are just above
+    * Stack grows down from the top
+    * Heap grows up from the bottom
+*/
+int GetNumElements(int x[]) {
+    size_t sizeOneElement = sizeof(x[0]);
+    size_t sizeArray = sizeof(x);
+    int numElements = sizeArray / sizeOneElement;
+    return numElements;
+}
+
+int main(void) {
+    // void* malloc(size_t size);
+    // size_t is an unsigned integer type defined in <stdlib.h>
+    // used to represent sizes fo objects in bytes
+    // if successful, a call to malloc(n) returns a generic pointer (void*) to the first byte of a block of memory of at least n bytes on the heap
+    // if unsuccessful, returns NULL
+
+
+    int* memory = malloc(sizeof(int) * 3);
+    memory[2] = 5;
+    printf("memory[2] = %d\n", memory[2]);
+    
+    char* p = malloc(100);
+    if (p == NULL) {
+        perror("Not enough memory");
+        return 1;
+    }
+
+    // number of elements in array = size of array (in bytes) / size of one element (in bytes)
+    int a[5];
+    size_t sizeOneElement = sizeof(a[0]);
+    size_t sizeArray = sizeof(a);
+
+    int numElements = sizeArray / sizeOneElement;
+    printf("Number of elements in a: %d\n", numElements);
+
+    int z[10];
+    printf("Number of elements in z: %d\n", GetNumElements(z));
+
+    // void* calloc(size_t nmemb, size_t size); sets all elements in array to 0!
+    // nmemb is the number of elements
+    // size is the size of each element in bytes
+
+    int* q = calloc(10, 10*sizeof(int));
+    printf("q[5] = %d\n", q[5]);
+
+    // void* realloc(void* ptr, size_t size);
+    // reallocates memory pointed to by ptr to size bytes
+
+    free(q);
+    free(p);
+    free(memory);
+
+    return 0;
+
+}
+
